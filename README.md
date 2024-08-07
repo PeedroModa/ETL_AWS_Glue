@@ -8,7 +8,13 @@ Este repositório contém um pipeline de ETL (Extração, Transformação e Carr
 
 O bucket S3 possui a seguinte estrutura de diretórios:
 
--**logs/**: Armazena logs gerados durante a execução dos scripts e jobs, úteis para debugging e monitoramento.
--**scripts/**: Contém scripts utilizados no processo de ETL.
--**source_data/**: Pasta onde os arquivos CSV brutos são colocados.
--**datalake/**: Pasta de destino onde os arquivos transformados em formato Parquet são armazenados.
+- **logs/**: Armazena logs gerados durante a execução dos scripts e jobs, úteis para debugging e monitoramento.
+
+- **scripts/**: Contém scripts utilizados no processo de ETL.
+
+- **source_data/**: Pasta onde os arquivos CSV brutos são colocados.
+
+- **datalake/**: Pasta de destino onde os arquivos transformados em formato Parquet são armazenados.
+
+# Arquitetura 
+
