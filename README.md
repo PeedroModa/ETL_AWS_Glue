@@ -18,3 +18,43 @@ O bucket S3 possui a seguinte estrutura de diretórios:
 
 # Arquitetura 
 
+![Captura de Tela](image/Captura%20de%20tela%202024-08-07%20103744.png)
+
+
+# Etapas do Pipeline de ETL
+
+1. **Ingestão dos Dados**
+   
+Carregamento dos arquivos CSV brutos na pasta source_data do bucket S3.
+
+2. **Configuração do AWS Glue**
+
+Utilizado o AWS Glue para criar um Crawler que rastreia a pasta source_data e catalogue os dados brutos.
+Criado um database no AWS Glue para armazenar as tabelas catalogadas.
+
+3. **Job de Transformação**
+
+Job desenvolvido em Python no AWS Glue para:
+
+- Ler os arquivos CSV brutos da pasta source_data.
+
+- Realizar a união dos DataFrames.
+
+- Transformar os dados no formato Parquet.
+
+- Particionar os dados por estado do cliente (customer_state).
+
+- Carregar os arquivos Parquet transformados na pasta datalake.
+
+4. **Particionamento e Salvamento**
+
+- Particionei o DataFrame resultante pela coluna customer_state.
+- Salvei o DataFrame particionado no formato Parquet na pasta datalake.
+
+5. **Catalogação Final**
+
+- Executei um novo Crawler para catalogar os arquivos Parquet na pasta datalake.
+  
+6. **Consultas com AWS Athena**
+
+- Utilizei o AWS Athena para executar consultas SQL diretamente nos arquivos Parquet armazenados na pasta datalake.
