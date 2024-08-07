@@ -46,10 +46,13 @@ Job desenvolvido em Python no AWS Glue para:
 
 - Carregar os arquivos Parquet transformados na pasta datalake.
 
-4. **Particionamento e Salvamento**
+4. **Particionamento**
 
-Particionado o DataFrame resultante pela coluna customer_state.
-Salvei o DataFrame particionado no formato Parquet na pasta datalake.
+O particionamento de dados é relevante para o AWS Athena por algumas razões, dentre elas, destacam-se duas principais: redução de custo e melhoria de performance nas consultas.
+
+Redução de custos: A cobrança do Athena é realizada de acordo com a quantidade de dados gerados por consulta. Com o particionamento, asseguramos que apenas as partições relevantes são lidas, reduzindo a quantidade de dados processados e custo.
+
+Melhora na performance das consultas: Assegura que apenas as partições necessárias para uma consulta específica, acelerando o tempo de resposta das consultas.
 
 5. **Catalogação Final**
 
