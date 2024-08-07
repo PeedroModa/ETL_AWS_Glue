@@ -83,7 +83,7 @@ resultado_join5 = pd.merge(resultado_join4, df6, left_on='product_id_items', rig
 resultado_join6 = pd.merge(resultado_join5, df7, left_on='seller_id', right_on='seller_id_sellers', how='inner')
 resultado_join7 = pd.merge(resultado_join6, df8, left_on='product_category_name', right_on='product_category_name_translation', how='inner')
 
-# Adiciona a coluna 'customer_state' para particionamento (ajuste conforme necessário)
+# Adiciona a coluna 'customer_state' para particionamento 
 resultado_join7['customer_state'] = resultado_join7['customer_state'].astype(str)  # Assegura que 'customer_state' é uma string
 
 # Salvando o resultado no S3 em formato Parquet particionado por customer_state
