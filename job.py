@@ -1,3 +1,5 @@
+# Importação de bibliotecas
+
 import boto3
 import pandas as pd
 import pyarrow as pa
@@ -7,12 +9,12 @@ import io
 # Configuração do cliente S3
 s3_client = boto3.client('s3')
 
-# Função para ler um arquivo CSV do S3 para um DataFrame do pandas
+# Lê um arquivo CSV de um bucket S3 e retorna um DataFrame pandas.
 def read_csv_from_s3(bucket, key):
     response = s3_client.get_object(Bucket=bucket, Key=key)
     return pd.read_csv(response['Body'])
 
-# Função para salvar um DataFrame do pandas em arquivos Parquet particionados por customer_state no S3
+# Função para salvar um DataFrame do pandas em arquivos Parquet particionados pela coluna customer_state no S3
 def save_parquet_partitions_to_s3(df, bucket, prefix):
     # Cria um buffer para o arquivo Parquet
     parquet_buffer = io.BytesIO()
@@ -32,6 +34,7 @@ def save_parquet_partitions_to_s3(df, bucket, prefix):
         partition_key = f"{prefix}/customer_state={state}/resultado_join.parquet"
         s3_client.put_object(Bucket=bucket, Key=partition_key, Body=partition_buffer.getvalue())
 
+# Define o nome do bucket S3 onde os arquivos estão armazenados.
 bucket_name = 'datalake-new-project'
 
 # Lista de arquivos CSV a serem lidos
@@ -48,12 +51,6 @@ csv_files = [
 
 # Leitura dos arquivos CSV para DataFrames
 dfs = {key.split('/')[-1].replace('.csv', ''): read_csv_from_s3(bucket_name, key) for key in csv_files}
-
-# Verificar as colunas de cada DataFrame carregado
-for nome_variavel, df in dfs.items():
-    print(f"{nome_variavel}:")
-    print(df.columns)
-    print()
 
 # Renomear colunas para evitar duplicatas
 dfs['olist_orders_dataset'] = dfs['olist_orders_dataset'].rename(columns={'customer_id': 'customer_id_orders'})
