@@ -48,13 +48,13 @@ Job desenvolvido em Python no AWS Glue para:
 
 4. **Particionamento e Salvamento**
 
-- Particionei o DataFrame resultante pela coluna customer_state.
-- Salvei o DataFrame particionado no formato Parquet na pasta datalake.
+Particionado o DataFrame resultante pela coluna customer_state.
+Salvei o DataFrame particionado no formato Parquet na pasta datalake.
 
 5. **Catalogação Final**
 
-- Executei um novo Crawler para catalogar os arquivos Parquet na pasta datalake.
+Executado um novo Crawler para catalogar os arquivos Parquet na pasta datalake.
   
 6. **Consultas com AWS Athena**
 
-- Utilizei o AWS Athena para executar consultas SQL diretamente nos arquivos Parquet armazenados na pasta datalake.
+Utilizado o AWS Athena para executar consultas SQL diretamente nos arquivos Parquet armazenados na pasta datalake.
